@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/train_schedule_provider.dart';
+import '../models/timetable_entity.dart';
 import '../widgets/exact_android_grid_widget.dart';
 import '../widgets/exact_android_countdown_widget.dart';
 import '../widgets/exact_android_update_widget.dart';
 import '../widgets/exact_android_search_widget.dart';
+import 'settings_screen.dart';
 
 class ExactAndroidScreen extends StatefulWidget {
   const ExactAndroidScreen({Key? key}) : super(key: key);
@@ -205,7 +208,6 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Arýza Bildirimi'),
-        subtitle: const Text('Sistem arýza kayýtlarý ve bildirimleri'),
         content: SizedBox(
           width: double.maxFinite,
           height: 300,
@@ -228,88 +230,10 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
   }
 
   void _showSettingsDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Ayarlar'),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: ListView(
-            children: [
-              const Text(
-                'Genel Ayarlar',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Ýstasyon isimleri ve alarm davranýþýný buradan yönetebilirsiniz.',
-                style: TextStyle(
-                  color: Color(0xFF6C757D),
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(height: 16),
-              
-              // First Station
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Uç istasyon adý',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 8),
-              
-              // Last Station
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Son istasyon adý',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              
-              // Switches
-              SwitchListTile(
-                title: const Text('Alarm açýk'),
-                value: true,
-                onChanged: (value) {},
-              ),
-              SwitchListTile(
-                title: const Text('Alarm sesi açýk'),
-                value: true,
-                onChanged: (value) {},
-              ),
-              SwitchListTile(
-                title: const Text('Alarm titreþimi açýk'),
-                value: true,
-                onChanged: (value) {},
-              ),
-              SwitchListTile(
-                title: const Text('Karanlýk tema'),
-                value: false,
-                onChanged: (value) {},
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Ýptal'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Ayarlar kaydedildi')),
-              );
-            },
-            child: const Text('Kaydet'),
-          ),
-        ],
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
       ),
     );
   }

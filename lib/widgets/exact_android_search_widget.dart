@@ -71,14 +71,10 @@ class _ExactAndroidSearchWidgetState extends State<ExactAndroidSearchWidget> {
                 spacing: 8,
                 runSpacing: 8,
                 children: _recentTrains.map((train) {
-                  return ActionChip(
+                  return Chip(
                     label: Text(train),
                     backgroundColor: const Color(0xFFE3F2FD),
                     labelStyle: const TextStyle(color: Color(0xFF1A237E)),
-                    onPressed: () {
-                      _controller.text = train;
-                      context.read<TrainScheduleProvider>().loadTimetableForTrain(int.parse(train));
-                    },
                     deleteIcon: const Icon(Icons.close, size: 16),
                     onDeleted: () {
                       setState(() {
