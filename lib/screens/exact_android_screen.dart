@@ -50,19 +50,19 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
                     ),
                     // Info button
                     IconButton(
-                      onPressed: () => _showInfoDialog(),
+                      onPressed: () => _showInfoDialog(context),
                       icon: const Icon(Icons.info_outline),
                       color: const Color(0xFF1A237E),
                     ),
                     // Error button
                     IconButton(
-                      onPressed: () => _showErrorDialog(),
+                      onPressed: () => _showErrorDialog(context),
                       icon: const Icon(Icons.error_outline),
                       color: const Color(0xFF1A237E),
                     ),
                     // Settings button
                     IconButton(
-                      onPressed: () => _showSettingsDialog(),
+                      onPressed: () => _showSettingsDialog(context),
                       icon: const Icon(Icons.settings_outlined),
                       color: const Color(0xFF1A237E),
                     ),
@@ -147,7 +147,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
           'GÖREV NO TAKİBİ\n\n'
           'Versiyon: 1.0.0\n'
           'Geliştirici: Onur\n\n'
-          'Bu uygulama M8 tren çizelgelerini göstermek için geliştirilmiştir.',
+          'Bu uygulama TCDD tren çizelgelerini göstermek için geliştirilmiştir.',
         ),
         actions: [
           TextButton(
@@ -159,7 +159,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
     );
   }
 
-  void _showErrorDialog() {
+  void _showErrorDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -183,7 +183,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
     );
   }
 
-  void _showSettingsDialog() {
+  void _showSettingsDialog(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
