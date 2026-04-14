@@ -6,7 +6,6 @@ import '../providers/train_schedule_provider.dart';
 import '../models/timetable_entity.dart';
 import '../widgets/exact_android_grid_widget.dart';
 import '../widgets/exact_android_countdown_widget.dart';
-import '../widgets/exact_android_update_widget.dart';
 import '../widgets/exact_android_search_widget.dart';
 import 'settings_screen.dart';
 
@@ -92,11 +91,6 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
               
               // Countdown Card
               const ExactAndroidCountdownWidget(),
-              
-              const SizedBox(height: 16),
-              
-              // Update Card
-              const ExactAndroidUpdateWidget(),
               
               const SizedBox(height: 16),
               

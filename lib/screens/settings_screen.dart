@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/train_schedule_provider.dart';
 import '../services/alarm_manager.dart';
 import '../services/settings_service.dart';
+import '../widgets/exact_android_update_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -466,81 +467,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 16),
             
             // Güncelleme Ayarlarý
-            Card(
-              elevation: 6,
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(22),
-                side: BorderSide(
-                  color: const Color(0xFFE8EAF6),
-                  width: 1,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Veri ve Uygulama Güncellemeleri',
-                    style: TextStyle(
-                      color: Color(0xFF1A237E),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    ),
-                    const SizedBox(height: 8),
-                    
-                    const Text(
-                      'Veri ve uygulama güncellemelerini buradan yönetebilirsiniz.',
-                    style: TextStyle(
-                      color: Color(0xFF6C757D),
-                      fontSize: 14,
-                    ),
-                    ),
-                    const SizedBox(height: 12),
-                    
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              // Güncelleme kontrolü
-                            },
-                            icon: const Icon(Icons.refresh),
-                            label: const Text('Güncelleme Kontrol Et'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2196F3),
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              // Veri güncelleme
-                            },
-                            icon: const Icon(Icons.download),
-                            label: const Text('Veri Güncelle'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4CAF50),
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const ExactAndroidUpdateWidget(),
             
             const SizedBox(height: 16),
             

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import '../services/time_calculator.dart';
 import '../services/alarm_manager.dart';
+import '../services/train_schedule_service.dart';
+import '../providers/train_schedule_provider.dart';
 
 class ExactAndroidCountdownWidget extends StatefulWidget {
   const ExactAndroidCountdownWidget({Key? key}) : super(key: key);
@@ -35,35 +38,44 @@ class _ExactAndroidCountdownWidgetState extends State<ExactAndroidCountdownWidge
     });
   }
 
-  void _updateCountdown() {
+  void _updateCountdown() async {
     final now = DateTime.now();
     
-    // Örnek kalkýþ saatleri (gerçek veriden gelmeli)
-    _departureTimes = [
-      DateTime(now.year, now.month, now.day, 6, 0, 0),
-      DateTime(now.year, now.month, now.day, 6, 8, 29),
-      DateTime(now.year, now.month, now.day, 6, 16, 58),
-      DateTime(now.year, now.month, now.day, 6, 25, 27),
-      DateTime(now.year, now.month, now.day, 6, 33, 56),
-      DateTime(now.year, now.month, now.day, 6, 42, 25),
-      DateTime(now.year, now.month, now.day, 6, 50, 54),
-      DateTime(now.year, now.month, now.day, 7, 7, 52),
-      DateTime(now.year, now.month, now.day, 7, 15, 8),
-      DateTime(now.year, now.month, now.day, 7, 22, 24),
-      DateTime(now.year, now.month, now.day, 7, 29, 40),
-      DateTime(now.year, now.month, now.day, 7, 36, 56),
-    ];
+    // Provider'dan seçili görev numarasýný al
+    final provider = context.read<TrainScheduleProvider>();
+    final selectedTrainNumber = provider.selectedTrainNumber ?? 1;
+    
+    // Gerçek veriyi yükle
+    final timetables = await TrainScheduleService.getTimetables();
+    
+    // Görev numarasýna göre filtrele
+    final filteredTimetables = timetables.where((t) => t.trainNumber == selectedTrainNumber).toList();
+    
+    // direction 0 = uç istasyon kalkýþlarý
+    final departureTimes = filteredTimetables
+        .where((t) => t.direction == 0)
+        .map((t) => TimeCalculator.parseTime(t.time))
+        .where((time) => time != null)
+        .cast<DateTime>()
+        .toList();
 
     // Sonraki kalkýþý bul
-    _nextDeparture = TimeCalculator.findNextDeparture(_departureTimes, now);
+    _nextDeparture = TimeCalculator.findNextDeparture(departureTimes, now);
 
     if (_nextDeparture != null) {
       final remainingSeconds = TimeCalculator.secondsUntil(now, _nextDeparture!);
       _countdownText = TimeCalculator.formatHhMmSs(remainingSeconds);
-      _hintText = 'Bir sonraki tur saati: ${TimeCalculator.formatTime(_nextDeparture!)}';
+      
+      // Orijinal saat formatýný bul
+      final originalTime = filteredTimetables
+          .where((t) => t.direction == 0)
+          .firstWhere((t) => TimeCalculator.parseTime(t.time) == _nextDeparture,
+              orElse: () => filteredTimetables.first);
+      
+      _hintText = 'Bir sonraki tur saati: ${originalTime.time}';
 
       // Alarm kontrolü
-      AlarmManager.evaluateAlarm(_nextDeparture!, 1);
+      AlarmManager.evaluateAlarm(_nextDeparture!, selectedTrainNumber);
     } else {
       _countdownText = '--:--:--';
       _hintText = 'Bugünkü turlar bitti';
