@@ -41,7 +41,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'GÖREV NO TAKÝBÝ',
+                        'GÖREV NO TAKİBİ',
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: const Color(0xFF1A237E),
                           fontWeight: FontWeight.w600,
@@ -74,7 +74,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                 child: const Text(
-                  'Canlý görev akýþý ve sonraki tur takibi',
+                  'Canlı görev akışı ve sonraki tur takibi',
                   style: TextStyle(
                     color: Color(0xFF424242),
                     fontSize: 13,
@@ -147,7 +147,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
           'GÖREV NO TAKİBİ\n\n'
           'Versiyon: 1.0.0\n'
           'Geliştirici: Onur\n\n'
-          'Bu uygulama TCDD tren çizelgelerini göstermek için geliştirilmiştir.',
+          'Bu uygulama M8 tren çizelgelerini göstermek için geliştirilmiştir.',
         ),
         actions: [
           TextButton(

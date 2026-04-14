@@ -16,8 +16,8 @@ class ExactAndroidGridWidget extends StatelessWidget {
     return FutureBuilder<Map<String, dynamic>>(
       future: SettingsService.loadSettings(),
       builder: (context, snapshot) {
-        final firstStationName = snapshot.data?['firstStationName'] ?? 'UÇ ÝSTASYON';
-        final lastStationName = snapshot.data?['lastStationName'] ?? 'SON ÝSTASYON';
+        final firstStationName = snapshot.data?['firstStationName'] ?? 'PARSELLER';
+        final lastStationName = snapshot.data?['lastStationName'] ?? 'BOSTANCI';
         
         if (schedules.isEmpty) {
           return Container(
@@ -32,7 +32,7 @@ class ExactAndroidGridWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    'Bu görev numarasýna ait çizelge bulunamadý',
+                    'Bu görev numarasına ait çizelge bulunamadı',
                     style: TextStyle(
                       fontSize: 16,
                       color: Color(0xFF6C757D),

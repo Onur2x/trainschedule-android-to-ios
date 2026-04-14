@@ -19,7 +19,7 @@ class TrainScheduleApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => TrainScheduleProvider()),
       ],
       child: MaterialApp(
-        title: 'GÖREV NO TAKÝBÝ',
+        title: 'GÖREV NO TAKİBİ',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,

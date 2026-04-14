@@ -12,7 +12,7 @@ class ExactAndroidSearchWidget extends StatefulWidget {
 
 class _ExactAndroidSearchWidgetState extends State<ExactAndroidSearchWidget> {
   final TextEditingController _controller = TextEditingController();
-  final List<String> _recentTrains = ['52', '53', '54', '55', '56', '57', '58', '59'];
+  final List<String> _recentTrains = ['51','52', '53', '54', '55', '56', '57', '58', '59'];
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +41,10 @@ class _ExactAndroidSearchWidgetState extends State<ExactAndroidSearchWidget> {
             TextField(
               controller: _controller,
               decoration: const InputDecoration(
-                hintText: 'Görev numarasý',
+                hintText: 'Görev numarası',
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                helperText: 'Son kullanýlan görevler önerilir',
+                helperText: 'Son kullanılan görevler önerilir',
                 helperStyle: TextStyle(
                   color: Color(0xFF6C757D),
                   fontSize: 12,

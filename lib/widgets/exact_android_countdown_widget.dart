@@ -16,7 +16,7 @@ class ExactAndroidCountdownWidget extends StatefulWidget {
 class _ExactAndroidCountdownWidgetState extends State<ExactAndroidCountdownWidget> {
   Timer? _timer;
   String _countdownText = '--:--:--';
-  String _hintText = 'Tur bulunamadý';
+  String _hintText = 'Tur bulunamadı';
   DateTime? _nextDeparture;
   List<DateTime> _departureTimes = [];
 

@@ -59,7 +59,7 @@ class ExactAndroidUpdateWidget extends StatelessWidget {
                       );
                     },
                     icon: const Icon(Icons.download),
-                    label: const Text('Ýndir'),
+                    label: const Text('İndir'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF9C27B0),
                       foregroundColor: Colors.white,

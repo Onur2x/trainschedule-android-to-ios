@@ -113,7 +113,7 @@ class AlarmManager {
 
   static void _showNotification(int trainNumber, DateTime departureTime) {
     // Notification implementation would require platform-specific code
-    debugPrint('ALARM: Görev $trainNumber - Kalkýþ: ${TimeCalculator.formatTime(departureTime)}');
+    debugPrint('ALARM: Görev $trainNumber - Kalkış: ${TimeCalculator.formatTime(departureTime)}');
   }
 
   static void setAlarmSettings({

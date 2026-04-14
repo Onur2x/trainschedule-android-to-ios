@@ -37,8 +37,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final settings = await SettingsService.loadSettings();
     
     setState(() {
-      _firstStationController.text = settings['firstStationName'] ?? 'UÇ ÝSTASYON';
-      _lastStationController.text = settings['lastStationName'] ?? 'SON ÝSTASYON';
+      _firstStationController.text = settings['firstStationName'] ?? 'PARSELLER';
+      _lastStationController.text = settings['lastStationName'] ?? 'BOSTANCI';
       _alarmEnabled = settings['alarmEnabled'] ?? true;
       _soundEnabled = settings['alarmSoundEnabled'] ?? true;
       _vibrationEnabled = settings['alarmVibrationEnabled'] ?? true;
@@ -127,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'Klasik Zil',
       'Tren Düdük',
       'Saat Zili',
-      'Yumuþak Melodi',
+      'Yumuşak Melodi',
       'Dijital Bip',
     ];
 
@@ -167,7 +167,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Ýptal'),
+            child: const Text('İptal'),
           ),
         ],
       ),
@@ -184,7 +184,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Alarm Davranýþý'),
+        title: const Text('Alarm Davranışı'),
         content: SizedBox(
           height: 150,
           child: ListView.builder(
@@ -217,7 +217,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Ýptal'),
+            child: const Text('İptal'),
           ),
         ],
       ),
@@ -295,7 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                     const SizedBox(height: 8),
                     const Text(
-                    'Ýstasyon isimleri ve alarm davranýþýný buradan yönetebilirsiniz.',
+                    'İstasyon isimleri ve alarm davranışını buradan yönetebilirsiniz.',
                     style: TextStyle(
                       color: Color(0xFF6C757D),
                       fontSize: 14,
@@ -307,7 +307,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     TextField(
                       controller: _firstStationController,
                       decoration: const InputDecoration(
-                        labelText: 'Uç istasyon adý',
+                        labelText: 'Uç istasyon adı',
                         border: OutlineInputBorder(),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
@@ -318,7 +318,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     TextField(
                       controller: _lastStationController,
                       decoration: const InputDecoration(
-                        labelText: 'Son istasyon adý',
+                        labelText: 'Son istasyon adı',
                         border: OutlineInputBorder(),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
@@ -347,7 +347,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Alarm Ayarlarý',
+                      'Alarm Ayarları',
                     style: TextStyle(
                       color: Color(0xFF1A237E),
                       fontSize: 16,
@@ -358,7 +358,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     
                     // Alarm açýk/kapatý
                     SwitchListTile(
-                      title: const Text('Alarm açýk'),
+                      title: const Text('Alarm açık'),
                       value: _alarmEnabled,
                       onChanged: (value) {
                         setState(() {
@@ -374,7 +374,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     
                     // Karanlýk tema
                     SwitchListTile(
-                      title: const Text('Karanlýk tema'),
+                      title: const Text('Karanlık tema'),
                       value: _darkTheme,
                       onChanged: (value) {
                         _darkTheme = value;
@@ -384,7 +384,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     
                     // Alarm sesi
                     SwitchListTile(
-                      title: const Text('Alarm sesi açýk'),
+                      title: const Text('Alarm sesi açık'),
                       value: _soundEnabled,
                       onChanged: (value) {
                         setState(() {
@@ -400,7 +400,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     
                     // Alarm titreþimi
                     SwitchListTile(
-                      title: const Text('Alarm titreþimi açýk'),
+                      title: const Text('Alarm titreşimi açık'),
                       value: _vibrationEnabled,
                       onChanged: (value) {
                         setState(() {
@@ -423,7 +423,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: ElevatedButton.icon(
                             onPressed: () => _showAlarmSoundDialog(),
                             icon: const Icon(Icons.music_note),
-                            label: const Text('Alarm Sesini Deðiþ'),
+                            label: const Text('Alarm Sesini Değiş'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF6366F1),
                               foregroundColor: Colors.white,
@@ -453,7 +453,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     TextFormField(
                       controller: _alarmThresholdController,
                       decoration: const InputDecoration(
-                        labelText: 'Alarm eþiði (saniye)',
+                        labelText: 'Alarm eşiği (saniye)',
                         border: OutlineInputBorder(),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
@@ -568,7 +568,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       const SizedBox(height: 8),
                       const Text(
-                        'Mevcut sürüm: v1\nYeni sürüm: v2\nKaynak satýr: 100\nGeçerli satýr: 150\nAtlanan satýr: 10\nTarife sayýsý: 2\nMükerrer kayýt: 0\nEksik yön çifti: 0\nEksik TTID eþleþmesi: 0',
+                        'Mevcut sürüm: v1\nYeni sürüm: v2\nKaynak satır: 100\nGeçerli satır: 150\nAtlanan satır: 10\nTarife sayısı: 2\nMükerrer kayıt: 0\nEksik yön çifti: 0\nEksik TTID eşleşmesi: 0',
                         style: TextStyle(
                           color: Color(0xFF424242),
                           fontSize: 13,
@@ -616,7 +616,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ElevatedButton.icon(
                 onPressed: _saveSettings,
                 icon: const Icon(Icons.save),
-                label: const Text('Ayarlarlarý Kaydet'),
+                label: const Text('Ayarlarları Kaydet'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4CAF50),
                   foregroundColor: Colors.white,
