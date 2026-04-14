@@ -54,7 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final thresholdText = _alarmThresholdController.text.trim();
     final alarmThreshold = int.tryParse(thresholdText) ?? 300;
 
-    if (firstStation.isEmpty() || lastStation.isEmpty()) {
+    if (firstStation.isEmpty || lastStation.isEmpty) {
       _showErrorDialog('Eksik Bilgi', 'Ýstasyon adlarý boþ býrakýlamaz.');
       return;
     }
@@ -83,6 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       mode: _alarmMode,
       soundEnabled: _soundEnabled,
       vibrationEnabled: _vibrationEnabled,
+      alarmEnabled: _alarmEnabled,
     );
     
     _showSuccessDialog('Baþarýldý', 'Ayarlar kaydedildi!');
@@ -143,13 +144,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text(sound),
                 onTap: () {
                   Navigator.pop(context);
-                  _selectedAlarmSound = sound;
+                  setState(() {
+                    _selectedAlarmSound = sound;
+                  });
                 },
                 trailing: Radio<String>(
                   value: sound,
                   groupValue: _selectedAlarmSound,
                   onChanged: (value) {
-                    _selectedAlarmSound = value;
+                    if (value != null) {
+                      setState(() {
+                        _selectedAlarmSound = value;
+                      });
+                    }
                   },
                 ),
               );
@@ -187,13 +194,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text(mode),
                 onTap: () {
                   Navigator.pop(context);
-                  _alarmMode = index;
+                  setState(() {
+                    _alarmMode = index;
+                  });
                 },
                 trailing: Radio<String>(
                   value: alarmModes[index],
                   groupValue: _getAlarmModeString(_alarmMode),
                   onChanged: (value) {
-                    _alarmMode = _getAlarmModeFromString(value);
+                    if (value != null) {
+                      setState(() {
+                        _alarmMode = _getAlarmModeFromString(value);
+                      });
+                    }
                   },
                 ),
               );
@@ -216,7 +229,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return 'Bir kez çal';
       case AlarmManager.MODE_CONTINUOUS:
         return 'Sürekli çal';
-      case AlarmManager.EVERY_MINUTE:
+      case AlarmManager.MODE_EVERY_MINUTE:
         return 'Her dakika çal';
       default:
         return 'Bir kez çal';
@@ -230,7 +243,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case 'Sürekli çal':
         return AlarmManager.MODE_CONTINUOUS;
       case 'Her dakika çal':
-        return AlarmManager.EVERY_MINUTE;
+        return AlarmManager.MODE_EVERY_MINUTE;
       default:
         return AlarmManager.MODE_ONCE;
     }
@@ -347,7 +360,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: const Text('Alarm açýk'),
                       value: _alarmEnabled,
                       onChanged: (value) {
-                        _alarmEnabled = value;
+                        setState(() {
+                          _alarmEnabled = value;
+                        });
                         AlarmManager.setAlarmSettings(
                           soundEnabled: _soundEnabled,
                           vibrationEnabled: _vibrationEnabled,
@@ -371,7 +386,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: const Text('Alarm sesi açýk'),
                       value: _soundEnabled,
                       onChanged: (value) {
-                        _soundEnabled = value;
+                        setState(() {
+                          _soundEnabled = value;
+                        });
                         AlarmManager.setAlarmSettings(
                           soundEnabled: _soundEnabled,
                           vibrationEnabled: _vibrationEnabled,
@@ -385,7 +402,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: const Text('Alarm titreþimi açýk'),
                       value: _vibrationEnabled,
                       onChanged: (value) {
-                        _vibrationEnabled = value;
+                        setState(() {
+                          _vibrationEnabled = value;
+                        });
                         AlarmManager.setAlarmSettings(
                           soundEnabled: _soundEnabled,
                           vibrationEnabled: _vibrationEnabled,
@@ -430,14 +449,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     const SizedBox(height: 12),
                     
                     // Alarm eþi
-                    TextField(
+                    TextFormField(
                       controller: _alarmThresholdController,
                       decoration: const InputDecoration(
                         labelText: 'Alarm eþiði (saniye)',
                         border: OutlineInputBorder(),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        keyboardType: TextInputType.number,
                       ),
+                      keyboardType: TextInputType.number,
                     ),
                   ],
                 ),

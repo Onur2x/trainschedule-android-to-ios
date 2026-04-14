@@ -15,6 +15,7 @@ class AlarmManager {
   static int _currentTrainNumber = 0;
   static DateTime? _nextDeparture;
   static int _alarmThreshold = 300; // 5 dakika
+  static bool _alarmEnabled = true;
   static int _alarmMode = MODE_ONCE;
   static bool _soundEnabled = true;
   static bool _vibrationEnabled = true;
@@ -120,11 +121,13 @@ class AlarmManager {
     int? mode,
     bool? soundEnabled,
     bool? vibrationEnabled,
+    bool? alarmEnabled,
   }) {
     if (threshold != null) _alarmThreshold = threshold;
     if (mode != null) _alarmMode = mode;
     if (soundEnabled != null) _soundEnabled = soundEnabled;
     if (vibrationEnabled != null) _vibrationEnabled = vibrationEnabled;
+    if (alarmEnabled != null) _alarmEnabled = alarmEnabled;
   }
 
   static Map<String, dynamic> getAlarmSettings() {
