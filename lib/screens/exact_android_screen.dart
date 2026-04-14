@@ -125,11 +125,12 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
                       ),
                       child: ExactAndroidGridWidget(
                         schedules: provider.filteredTimetables,
-                    ),
-                  ),
-                ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
@@ -143,10 +144,10 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Genel Bilgiler'),
         content: const Text(
-          'GÖREV NO TAKÝBÝ\n\n'
+          'GÖREV NO TAKİBİ\n\n'
           'Versiyon: 1.0.0\n'
-          'Geliþtirici: Onur\n\n'
-          'Bu uygulama TCDD tren çizelgelerini göstermek için geliþtirilmiþtir.',
+          'Geliştirici: Onur\n\n'
+          'Bu uygulama TCDD tren çizelgelerini göstermek için geliştirilmiştir.',
         ),
         actions: [
           TextButton(
@@ -162,17 +163,15 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Arýza Bildirimi'),
-        content: SizedBox(
-          width: double.maxFinite,
-          height: 300,
-          child: ListView(
-            children: const [
-              ListTile(title: Text('Kayýtlý arýza bulunamadý')),
-              ListTile(title: Text('Arýza bildirim sistemi Aktif')),
-              ListTile(title: Text('Son kontrol: Bugün 14:30')),
-            ],
-          ),
+        title: const Text('Hata Kodları'),
+        content: const Text(
+          'Hata kodları ve açıklamaları:\n\n'
+          '100: Başarılı\n'
+          '101: Veri bulunamadı\n'
+          '102: Ağ hatası\n'
+          '103: İzin reddedildi\n'
+          '104: Zaman aşımı\n'
+          '105: Bilinmeyen hata',
         ),
         actions: [
           TextButton(
