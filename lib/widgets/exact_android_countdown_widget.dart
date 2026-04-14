@@ -140,12 +140,10 @@ class _ExactAndroidCountdownWidgetState extends State<ExactAndroidCountdownWidge
                   const SizedBox(width: 8),
                   Text(
                     _countdownText,
-                    style: TextStyle(
-                      color: AlarmManager.isRinging 
-                          ? const Color(0xFFE74C3C)
-                          : const Color(0xFF6366F1),
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1A237E),
                     ),
                   ),
                 ],

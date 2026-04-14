@@ -56,12 +56,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final alarmThreshold = int.tryParse(thresholdText) ?? 300;
 
     if (firstStation.isEmpty || lastStation.isEmpty) {
-      _showErrorDialog('Eksik Bilgi', 'Ýstasyon adlarý boþ býrakýlamaz.');
+      _showErrorDialog('Eksik Bilgi', 'İstasyon adları boş bırakılamaz.');
       return;
     }
 
     if (alarmThreshold < 1 || alarmThreshold > 3600) {
-      _showErrorDialog('Geçersiz Deðer', 'Alarm eþiði 1 ile 3600 saniye arasýnda olmalýdýr.');
+      _showErrorDialog('Geçersiz Değer', 'Alarm eşiği 1 ile 3600 saniye arasında olmalıdır.');
       return;
     }
 
@@ -87,7 +87,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       alarmEnabled: _alarmEnabled,
     );
     
-    _showSuccessDialog('Baþarýldý', 'Ayarlar kaydedildi!');
+    _showSuccessDialog('Başarılı', 'Ayarlar kaydedildi!');
   }
 
   void _showErrorDialog(String title, String message) {

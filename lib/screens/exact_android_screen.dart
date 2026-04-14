@@ -101,7 +101,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
                     if (provider.filteredTimetables.isEmpty) {
                       return const Center(
                         child: Text(
-                          'Görev numarasý girerek çizelge görüntüleyin',
+                          'Görev numarası girerek çizelge görüntüleyin',
                           style: TextStyle(
                             color: Color(0xFF1A237E),
                             fontSize: 16,
@@ -123,58 +123,19 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
                           ),
                         ],
                       ),
-                      child: Column(
-                        children: [
-                          // TTID Selector
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFE3F2FD),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(12),
-                                topRight: Radius.circular(12),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Text(
-                                  'Tarife seçimi',
-                                  style: TextStyle(
-                                    color: Color(0xFF1A237E),
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const Spacer(),
-                                DropdownButton<String>(
-                                  value: 'Hafta Içi',
-                                  items: const [
-                                    DropdownMenuItem(value: 'Hafta Içi', child: Text('Hafta Içi')),
-                                    DropdownMenuItem(value: 'Hafta Sonu', child: Text('Hafta Sonu')),
-                                  ],
-                                  onChanged: (value) {},
-                                ),
-                              ],
-                            ),
-                          ),
-                          
-                          // Grid
-                          Expanded(
-                            child: ExactAndroidGridWidget(
-                              schedules: provider.filteredTimetables,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                      child: ExactAndroidGridWidget(
+                        schedules: provider.filteredTimetables,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
+}
 
   void _showInfoDialog() {
     showDialog(

@@ -57,8 +57,8 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
 
     return {
-      'firstStationName': prefs.getString(_firstStationKey) ?? 'UÇ ÝSTASYON',
-      'lastStationName': prefs.getString(_lastStationKey) ?? 'SON ÝSTASYON',
+      'firstStationName': prefs.getString(_firstStationKey) ?? 'PARSELLER',
+      'lastStationName': prefs.getString(_lastStationKey) ?? 'BOSTANCI',
       'alarmEnabled': prefs.getBool(_alarmEnabledKey) ?? true,
       'alarmSoundEnabled': prefs.getBool(_alarmSoundEnabledKey) ?? true,
       'alarmVibrationEnabled': prefs.getBool(_alarmVibrationEnabledKey) ?? true,
