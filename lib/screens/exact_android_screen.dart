@@ -50,19 +50,19 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
                     ),
                     // Info button
                     IconButton(
-                      onPressed: () => _showInfoDialog(context),
+                      onPressed: () => _showInfoDialog(),
                       icon: const Icon(Icons.info_outline),
                       color: const Color(0xFF1A237E),
                     ),
                     // Error button
                     IconButton(
-                      onPressed: () => _showErrorDialog(context),
+                      onPressed: () => _showErrorDialog(),
                       icon: const Icon(Icons.error_outline),
                       color: const Color(0xFF1A237E),
                     ),
                     // Settings button
                     IconButton(
-                      onPressed: () => _showSettingsDialog(context),
+                      onPressed: () => _showSettingsDialog(),
                       icon: const Icon(Icons.settings_outlined),
                       color: const Color(0xFF1A237E),
                     ),
@@ -136,7 +136,6 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
       ),
     );
   }
-}
 
   void _showInfoDialog() {
     showDialog(
@@ -159,7 +158,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
     );
   }
 
-  void _showErrorDialog(BuildContext context) {
+  void _showErrorDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -183,7 +182,7 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
     );
   }
 
-  void _showSettingsDialog(BuildContext context) {
+  void _showSettingsDialog() {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -191,3 +190,4 @@ class _ExactAndroidScreenState extends State<ExactAndroidScreen> {
       ),
     );
   }
+}
