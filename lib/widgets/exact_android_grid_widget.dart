@@ -178,6 +178,7 @@ class ExactAndroidGridWidget extends StatelessWidget {
                           : null;
                           
                       // Sonraki kalkýþ saatini bul (dinlenme hesabý için)
+                      // Dinlenme = Sonraki PARSELLER kalkýþ - (Mevcut BOSTANCI varýþ + 25.5 dk)
                       DateTime? nextOutgoingTime;
                       if (index + 1 < outgoingSchedules.length) {
                         nextOutgoingTime = TimeCalculator.parseTime(outgoingSchedules[index + 1].time);
@@ -375,9 +376,11 @@ class ExactAndroidGridWidget extends StatelessWidget {
                                   _calculateRestTime(outgoingTime, incomingTime, nextOutgoingTime),
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: isActive 
-                                        ? Colors.white
-                                        : const Color(0xFF1A237E),
+                                    color: isPastRow
+                                        ? const Color(0xFF9E9E9E)
+                                        : (isActive 
+                                            ? Colors.white
+                                            : const Color(0xFF1A237E)),
                                     fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
@@ -399,18 +402,25 @@ class ExactAndroidGridWidget extends StatelessWidget {
   }
 
   String _calculateRestTime(DateTime? outgoingTime, DateTime? incomingTime, DateTime? nextOutgoingTime) {
+    // Dinlenme hesaplama:
+    // Mevcut satýr: PARSELLER -> BOSTANCI (incomingTime = BOSTANCI varýþ)
+    // Sonraki satýr: PARSELLER (nextOutgoingTime = sonraki PARSELLER kalkýþ)
+    // Formül: Sonraki PARSELLER kalkýþ - (BOSTANCI varýþ + 25.5 dk)
     if (incomingTime == null || nextOutgoingTime == null) {
       return '-';
     }
     
-    // Yeni formül: BOSTANCI saati + 25.5 dk ekle, sonraki kalkýþ saatinden çýkar
+    // BOSTANCI varýþ saatine 25.5 dk ekle
     final restStart = incomingTime.add(const Duration(minutes: 25, seconds: 30)); // 25.5 dk
+    
+    // Sonraki PARSELLER kalkýþtan çýkar
     final difference = nextOutgoingTime.difference(restStart);
     
     if (difference.isNegative) {
       return '-';
     }
 
+    // Sadece dakika olarak göster (saat yoksa sadece dakika)
     final totalMinutes = difference.inMinutes;
     final hours = totalMinutes ~/ 60;
     final minutes = totalMinutes % 60;
