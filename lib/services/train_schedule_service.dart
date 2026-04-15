@@ -87,13 +87,15 @@ class TrainScheduleService {
     return stationMap[gorevno] ?? 'Ýstasyon $gorevno';
   }
 
-  // Format time
+  // Format time - saniyeler dahil
   static String _formatTime(String time) {
-    if (time.isEmpty) return '00:00';
-    
+    if (time.isEmpty) return '00:00:00';
+
     final parts = time.split(':');
-    if (parts.length >= 2) {
-      return '${parts[0]}:${parts[1]}';
+    if (parts.length >= 3) {
+      return '${parts[0]}:${parts[1]}:${parts[2]}';
+    } else if (parts.length >= 2) {
+      return '${parts[0]}:${parts[1]}:00';
     }
     return time;
   }
