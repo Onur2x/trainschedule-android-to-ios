@@ -186,10 +186,16 @@ class ExactAndroidGridWidget extends StatelessWidget {
                       final isActive = (outgoingTime != null && !TimeCalculator.isPast(outgoingTime, now)) ||
                                      (incomingTime != null && !TimeCalculator.isPast(incomingTime, now));
                       
+                      // Geçmiþ saat kontrolü - hem uç hem son istasyon geçmiþte mi?
+                      final isPastRow = (outgoingTime != null && TimeCalculator.isPast(outgoingTime, now)) &&
+                                        (incomingTime != null && TimeCalculator.isPast(incomingTime, now));
+                      
                       return Container(
                         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                         decoration: BoxDecoration(
-                          color: isEvenRow ? const Color(0xFFFFFFFF) : const Color(0xFFF8F9FA),
+                          color: isPastRow 
+                              ? const Color(0xFFE8E8E8)  // Geçmiþ satýrlar için soluk gri
+                              : (isEvenRow ? const Color(0xFFFFFFFF) : const Color(0xFFF8F9FA)),
                           border: Border(
                             bottom: BorderSide(
                               color: const Color(0xFFE8EAF6),
@@ -205,14 +211,18 @@ class ExactAndroidGridWidget extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: isActive 
-                                      ? const Color(0xFF6366F1)
-                                      : const Color(0xFFF3E5F5),
+                                  color: isPastRow
+                                      ? const Color(0xFFD0D0D0)  // Geçmiþ için koyu gri
+                                      : (isActive 
+                                          ? const Color(0xFF6366F1)
+                                          : const Color(0xFFF3E5F5)),
                                   borderRadius: BorderRadius.circular(4),
                                   border: Border.all(
-                                    color: isActive 
-                                        ? const Color(0xFF6366F1)
-                                        : const Color(0xFFE8EAF6),
+                                    color: isPastRow
+                                        ? const Color(0xFFBDBDBD)
+                                        : (isActive 
+                                            ? const Color(0xFF6366F1)
+                                            : const Color(0xFFE8EAF6)),
                                     width: 1,
                                   ),
                                 ),
@@ -220,9 +230,11 @@ class ExactAndroidGridWidget extends StatelessWidget {
                                   firstStationName,
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: isActive 
-                                        ? Colors.white
-                                        : const Color(0xFF1A237E),
+                                    color: isPastRow
+                                        ? const Color(0xFF757575)  // Geçmiþ için soluk metin
+                                        : (isActive 
+                                            ? Colors.white
+                                            : const Color(0xFF1A237E)),
                                     fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
@@ -235,14 +247,18 @@ class ExactAndroidGridWidget extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: isActive 
-                                      ? const Color(0xFF6366F1)
-                                      : const Color(0xFFE8F5E8),
+                                  color: (outgoingTime != null && TimeCalculator.isPast(outgoingTime, now))
+                                      ? const Color(0xFFE0E0E0)  // Geçmiþ saat için soluk
+                                      : (isActive 
+                                          ? const Color(0xFF6366F1)
+                                          : const Color(0xFFE8F5E8)),
                                   borderRadius: BorderRadius.circular(4),
                                   border: Border.all(
-                                    color: isActive 
-                                        ? const Color(0xFF6366F1)
-                                        : const Color(0xFFE8EAF6),
+                                    color: (outgoingTime != null && TimeCalculator.isPast(outgoingTime, now))
+                                        ? const Color(0xFFBDBDBD)
+                                        : (isActive 
+                                            ? const Color(0xFF6366F1)
+                                            : const Color(0xFFE8EAF6)),
                                     width: 1,
                                   ),
                                 ),
@@ -252,9 +268,11 @@ class ExactAndroidGridWidget extends StatelessWidget {
                                       : '-',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: isActive 
-                                        ? Colors.white
-                                        : const Color(0xFF1A237E),
+                                    color: (outgoingTime != null && TimeCalculator.isPast(outgoingTime, now))
+                                        ? const Color(0xFF9E9E9E)  // Geçmiþ saat metni
+                                        : (isActive 
+                                            ? Colors.white
+                                            : const Color(0xFF1A237E)),
                                     fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
@@ -268,14 +286,18 @@ class ExactAndroidGridWidget extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: isActive 
-                                      ? const Color(0xFF6366F1)
-                                      : const Color(0xFFF3E5F5),
+                                  color: isPastRow
+                                      ? const Color(0xFFD0D0D0)  // Geçmiþ için koyu gri
+                                      : (isActive 
+                                          ? const Color(0xFF6366F1)
+                                          : const Color(0xFFF3E5F5)),
                                   borderRadius: BorderRadius.circular(4),
                                   border: Border.all(
-                                    color: isActive 
-                                        ? const Color(0xFF6366F1)
-                                        : const Color(0xFFE8EAF6),
+                                    color: isPastRow
+                                        ? const Color(0xFFBDBDBD)
+                                        : (isActive 
+                                            ? const Color(0xFF6366F1)
+                                            : const Color(0xFFE8EAF6)),
                                     width: 1,
                                   ),
                                 ),
@@ -283,9 +305,11 @@ class ExactAndroidGridWidget extends StatelessWidget {
                                   lastStationName,
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: isActive 
-                                        ? Colors.white
-                                        : const Color(0xFF1A237E),
+                                    color: isPastRow
+                                        ? const Color(0xFF757575)  // Geçmiþ için soluk metin
+                                        : (isActive 
+                                            ? Colors.white
+                                            : const Color(0xFF1A237E)),
                                     fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
@@ -298,14 +322,18 @@ class ExactAndroidGridWidget extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: isActive 
-                                      ? const Color(0xFF6366F1)
-                                      : const Color(0xFFE8F5E8),
+                                  color: (incomingTime != null && TimeCalculator.isPast(incomingTime, now))
+                                      ? const Color(0xFFE0E0E0)  // Geçmiþ saat için soluk
+                                      : (isActive 
+                                          ? const Color(0xFF6366F1)
+                                          : const Color(0xFFE8F5E8)),
                                   borderRadius: BorderRadius.circular(4),
                                   border: Border.all(
-                                    color: isActive 
-                                        ? const Color(0xFF6366F1)
-                                        : const Color(0xFFE8EAF6),
+                                    color: (incomingTime != null && TimeCalculator.isPast(incomingTime, now))
+                                        ? const Color(0xFFBDBDBD)
+                                        : (isActive 
+                                            ? const Color(0xFF6366F1)
+                                            : const Color(0xFFE8EAF6)),
                                     width: 1,
                                   ),
                                 ),
@@ -315,9 +343,11 @@ class ExactAndroidGridWidget extends StatelessWidget {
                                       : '-',
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: isActive 
-                                        ? Colors.white
-                                        : const Color(0xFF1A237E),
+                                    color: (incomingTime != null && TimeCalculator.isPast(incomingTime, now))
+                                        ? const Color(0xFF9E9E9E)  // Geçmiþ saat metni
+                                        : (isActive 
+                                            ? Colors.white
+                                            : const Color(0xFF1A237E)),
                                     fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.center,
