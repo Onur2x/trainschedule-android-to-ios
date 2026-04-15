@@ -149,8 +149,11 @@ class ExactAndroidGridWidget extends StatelessWidget {
                 final now = DateTime.now();
                 
                 // Android mantýðý: direction 0 = outgoing, direction 1 = incoming
-                final outgoingSchedules = runSchedules.where((s) => s.direction == 0).toList();
-                final incomingSchedules = runSchedules.where((s) => s.direction == 1).toList();
+                // Saatlere gore sýrala (kronolojik)
+                final outgoingSchedules = runSchedules.where((s) => s.direction == 0).toList()
+                  ..sort((a, b) => TimeCalculator.parseTime(a.time).compareTo(TimeCalculator.parseTime(b.time)));
+                final incomingSchedules = runSchedules.where((s) => s.direction == 1).toList()
+                  ..sort((a, b) => TimeCalculator.parseTime(a.time).compareTo(TimeCalculator.parseTime(b.time)));
                 
                 return Column(
                   children: List.generate(
@@ -173,6 +176,12 @@ class ExactAndroidGridWidget extends StatelessWidget {
                       final incomingTime = incomingSchedule != null 
                           ? TimeCalculator.parseTime(incomingSchedule.time) 
                           : null;
+                          
+                      // Sonraki kalkýþ saatini bul (dinlenme hesabý için)
+                      DateTime? nextOutgoingTime;
+                      if (index + 1 < outgoingSchedules.length) {
+                        nextOutgoingTime = TimeCalculator.parseTime(outgoingSchedules[index + 1].time);
+                      }
                           
                       final isActive = (outgoingTime != null && !TimeCalculator.isPast(outgoingTime, now)) ||
                                      (incomingTime != null && !TimeCalculator.isPast(incomingTime, now));
@@ -333,7 +342,7 @@ class ExactAndroidGridWidget extends StatelessWidget {
                                   ),
                                 ),
                                 child: Text(
-                                  _calculateRestTime(outgoingTime, incomingTime),
+                                  _calculateRestTime(outgoingTime, incomingTime, nextOutgoingTime),
                                   style: TextStyle(
                                     fontSize: 13,
                                     color: isActive 
@@ -359,13 +368,15 @@ class ExactAndroidGridWidget extends StatelessWidget {
     );
   }
 
-  String _calculateRestTime(DateTime? outgoingTime, DateTime? incomingTime) {
-    if (outgoingTime == null || incomingTime == null) {
+  String _calculateRestTime(DateTime? outgoingTime, DateTime? incomingTime, DateTime? nextOutgoingTime) {
+    if (incomingTime == null || nextOutgoingTime == null) {
       return '-';
     }
     
-    // Android mantýðýna göre dinlenme hesapla
-    final difference = incomingTime.difference(outgoingTime);
+    // Yeni formül: BOSTANCI saati + 25.5 dk ekle, sonraki kalkýþ saatinden çýkar
+    final restStart = incomingTime.add(const Duration(minutes: 25, seconds: 30)); // 25.5 dk
+    final difference = nextOutgoingTime.difference(restStart);
+    
     if (difference.isNegative) {
       return '-';
     }
